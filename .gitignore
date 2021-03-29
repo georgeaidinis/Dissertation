@@ -3,6 +3,9 @@ __pycache__/
 *.py[cod]
 *$py.class
 
+# PDFs so that large papers aren't uploaded here
+*.pdf
+
 # C extensions
 *.so
 

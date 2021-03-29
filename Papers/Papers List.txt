@@ -1,3 +1,6 @@
+Paper Repository:
+https://onedrive.live.com/?id=AA8858068CE037C7!839
+
 1) CHIMERA
 2) ClusterGAN
 3) Conditional GANs

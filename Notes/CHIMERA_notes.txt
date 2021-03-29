@@ -1,0 +1,26 @@
+
+##### Basic Point of this paper is: ##### 
+
+
+1) Αντί να ελέγχουν τις διαφορές μόνο μεταξύ των δύο γκρουπ (φυσιολογικοί και ασθενείς),
+ κάνουν clustering στους ασθενείς για να βρουν διαφορετικούς φαινότυπους
+
+2) Αντί να κάνουν clustering στα δεδομένα με βάση προηγούμενες ιδιότητες (φύλο, ηλικία, 
+brain size), κάνουν probabilistic clustering στους ασθενείς, και με συνδυασμό με τις
+ προϋπάρχουσες ιδιότητες, βρίσκουν τα transformations μεταξύ των δύο γκρουπ
+
+
+
+##### INITIAL ASSUMPTION ##### 
+
+Μεταξύ δύο (ίδιων στα προηγούμενα χαρακτηριστικά πλην την ύπαρξη της ασθένειας) ατόμων,
+η διαφορά που παρατηρείται στα δεδομένα οφείλεται αποκλειστικά στην επίδραση της 
+ασθένειας.
+
+
+X = {x1,x2,x3,...,xm} (Normal Control, M samples)
+Y = {y1,y2,y3,...,yn} (Patients, 	   N samples)
+
+D1: Hyperspace of imaging features (both X && Y are imaged)
+D2: Hyperspace of previous characteristics (age, sex...) (both X && Y are imaged)
+

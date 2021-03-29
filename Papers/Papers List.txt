@@ -1,0 +1,9 @@
+1) CHIMERA
+2) ClusterGAN
+3) Conditional GANs
+4) Finding Imaging Patterns of Structural Covariance via Non-Negative Matrix Factorization
+5) HYDRA
+6) Multi Layer Multi View AD Diagnosis Classification
+7) Multi View Classification for ND type Discrimination
+8) MV Learning in Biomedical Applications
+9) Patterns of cortical Remodelling

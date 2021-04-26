@@ -134,7 +134,7 @@ dmypy.json
 # MacOS related:
 .DS_Store
 
-# Specific directories:
-NMF_simulation/data/Denoised
-NMF_simulation/data/Noise_removed
-NMF_simulation/data/Noisy
+# # Specific directories:
+# NMF_simulation/data/Denoised
+# NMF_simulation/data/Noise_removed
+# NMF_simulation/data/Noisy

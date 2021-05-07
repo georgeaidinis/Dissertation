@@ -38,38 +38,38 @@ cd(cwd(1,1).folder);
 
 
 
-% Perform OPNMF:
-mkdir NMF_2_component;
-cd NMF_2_component;
-[W H] = opnmf_mem(X,2);
-for i = 1:2
-	w = reshape(W(:,i), [100,100]);
-	w = rescale(w,0,255);
-	imwrite(w, strcat('NMF_2_component_',string(i),'.jpeg'), 'JPEG');
-end
-cd ..;
+% % Perform OPNMF:
+% mkdir NMF_2_component;
+% cd NMF_2_component;
+% [W H] = opnmf_mem(X,2);
+% for i = 1:2
+% 	w = reshape(W(:,i), [100,100]);
+% 	w = rescale(w,0,255);
+% 	imwrite(w, strcat('NMF_2_component_',string(i),'.jpeg'), 'JPEG');
+% end
+% cd ..;
 
 
-mkdir NMF_4_component;
-cd NMF_4_component;
-[W H] = opnmf_mem(X,4);
-for i = 1:4
-	w = reshape(W(:,i), [100,100]);
-	w = rescale(w,0,255);
-	imwrite(w, strcat('NMF_4_component_',string(i),'.jpeg'), 'JPEG');
-end
-cd ..;
+% mkdir NMF_4_component;
+% cd NMF_4_component;
+% [W H] = opnmf_mem(X,4);
+% for i = 1:4
+% 	w = reshape(W(:,i), [100,100]);
+% 	w = rescale(w,0,255);
+% 	imwrite(w, strcat('NMF_4_component_',string(i),'.jpeg'), 'JPEG');
+% end
+% cd ..;
 
 
-mkdir NMF_6_component;
-cd NMF_6_component;
-[W H] = opnmf_mem(X,6);
-for i = 1:6
-	w = reshape(W(:,i), [100,100]);
-	w = rescale(w,0,255);
-	imwrite(w, strcat('NMF_6_component_',string(i),'.jpeg'), 'JPEG');
-end
-cd ..;
+% mkdir NMF_6_component;
+% cd NMF_6_component;
+% [W H] = opnmf_mem(X,6);
+% for i = 1:6
+% 	w = reshape(W(:,i), [100,100]);
+% 	w = rescale(w,0,255);
+% 	imwrite(w, strcat('NMF_6_component_',string(i),'.jpeg'), 'JPEG');
+% end
+% cd ..;
 
 
 mkdir NMF_8_component;
@@ -83,15 +83,15 @@ end
 cd ..;
 
 
-mkdir NMF_10_component;
-cd NMF_10_component;
-[W H] = opnmf_mem(X,10);
-for i = 1:10
-	w = reshape(W(:,i), [100,100]);
-	w = rescale(w,0,255);
-	imwrite(w, strcat('NMF_10_component_',string(i),'.jpeg'), 'JPEG');
-end
-cd ..;
+% mkdir NMF_10_component;
+% cd NMF_10_component;
+% [W H] = opnmf_mem(X,10);
+% for i = 1:10
+% 	w = reshape(W(:,i), [100,100]);
+% 	w = rescale(w,0,255);
+% 	imwrite(w, strcat('NMF_10_component_',string(i),'.jpeg'), 'JPEG');
+% end
+% cd ..;
 
 
 

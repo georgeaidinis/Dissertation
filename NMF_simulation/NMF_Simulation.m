@@ -38,15 +38,18 @@ for i = 1:s(1)
 end
 cd(cwd(1,1).folder);
 
-
+norms = [0 0 0 0 0];
 
 % Perform OPNMF:
 mkdir NMF_2_component;
 cd NMF_2_component;
 [W H] = opnmf_mem(X,2);
+norms(1) = norm(X - W*H,'fro');
 h = H.';
+sum_of_distances = [];
 for j = 2:2:10
-	idx = kmeans(h, j);
+	[idx, t, sumd] = kmeans(h, j);
+	sum_of_distances = [sum_of_distances sum(sumd)];
 	correct = 0;
 	text = "Sample name, Source, Atrophy Level, Category Assigned" + newline;
 
@@ -81,6 +84,13 @@ for j = 2:2:10
 	fprintf(fid, text);
 	fclose(fid);
 end
+figure('visible','off'); 
+plot([2 4 6 8 10], sum_of_distances, 'LineWidth', 2, 'Marker', 'o');
+title('Total Distance Error');
+xlabel('k');
+ylabel('Error');
+saveas(gcf, 'Kmeans_Distance_Error.jpeg');
+clear gcf;
 for i = 1:2
 	w = reshape(W(:,i), [100,100]);
 	w = rescale(w, 0, 255);
@@ -88,6 +98,7 @@ for i = 1:2
 	imagesc(w); 
 	colorbar; 
 	saveas(gcf, strcat('NMF_2_component_',string(i),'.jpeg'));
+	clear gcf;
 end
 cd ..;
 
@@ -95,9 +106,12 @@ cd ..;
 mkdir NMF_4_component;
 cd NMF_4_component;
 [W H] = opnmf_mem(X,4);
+norms(2) = norm(X - W*H,'fro');
 h = H.';
+sum_of_distances = [];
 for j = 2:2:10
-	idx = kmeans(h, j);
+	[idx, t, sumd] = kmeans(h, j);
+	sum_of_distances = [sum_of_distances sum(sumd)];
 
 	text = "Sample name, Source, Atrophy Level, Category Assigned" + newline;
 	for i = 1:1000
@@ -125,7 +139,12 @@ for j = 2:2:10
 	fprintf(fid, text);
 	fclose(fid);
 end
-
+figure('visible','off'); 
+plot([2 4 6 8 10], sum_of_distances, 'LineWidth', 2, 'Marker', 'o');
+title('Total Distance Error');
+xlabel('k');
+ylabel('Error');
+saveas(gcf, 'Kmeans_Distance_Error.jpeg');
 for i = 1:4
 	w = reshape(W(:,i), [100,100]);
 	w = rescale(w, 0, 255);
@@ -133,6 +152,7 @@ for i = 1:4
 	imagesc(w); 
 	colorbar; 
 	saveas(gcf, strcat('NMF_4_component_',string(i),'.jpeg'));
+	clear gcf;
 end
 cd ..;
 
@@ -140,9 +160,12 @@ cd ..;
 mkdir NMF_6_component;
 cd NMF_6_component;
 [W H] = opnmf_mem(X,6);
+norms(3) = norm(X - W*H,'fro');
 h = H.';
+sum_of_distances = [];
 for j = 2:2:10
-	idx = kmeans(h, j);
+	[idx, t, sumd] = kmeans(h, j);
+	sum_of_distances = [sum_of_distances sum(sumd)];
 
 	text = "Sample name, Source, Atrophy Level, Category Assigned" + newline;
 	for i = 1:1000
@@ -170,6 +193,12 @@ for j = 2:2:10
 	fprintf(fid, text);
 	fclose(fid);
 end
+figure('visible','off'); 
+plot([2 4 6 8 10], sum_of_distances, 'LineWidth', 2, 'Marker', 'o');
+title('Total Distance Error');
+xlabel('k');
+ylabel('Error');
+saveas(gcf, 'Kmeans_Distance_Error.jpeg');
 for i = 1:6
 	w = reshape(W(:,i), [100,100]);
 	w = rescale(w, 0, 255);
@@ -177,6 +206,7 @@ for i = 1:6
 	imagesc(w); 
 	colorbar; 
 	saveas(gcf, strcat('NMF_6_component_',string(i),'.jpeg'));
+	clear gcf;
 end
 cd ..;
 
@@ -184,9 +214,12 @@ cd ..;
 mkdir NMF_8_component;
 cd NMF_8_component;
 [W H] = opnmf_mem(X,8);
+norms(4) = norm(X - W*H,'fro');
 h = H.';
+sum_of_distances = [];
 for j = 2:2:10
-	idx = kmeans(h, j);
+	[idx, t, sumd] = kmeans(h, j);
+	sum_of_distances = [sum_of_distances sum(sumd)];
 
 	text = "Sample name, Source, Atrophy Level, Category Assigned" + newline;
 	for i = 1:1000
@@ -214,6 +247,12 @@ for j = 2:2:10
 	fprintf(fid, text);
 	fclose(fid);
 end
+figure('visible','off'); 
+plot([2 4 6 8 10], sum_of_distances, 'LineWidth', 2, 'Marker', 'o');
+title('Total Distance Error');
+xlabel('k');
+ylabel('Error');
+saveas(gcf, 'Kmeans_Distance_Error.jpeg');
 for i = 1:8
 	w = reshape(W(:,i), [100,100]);
 	w = rescale(w, 0, 255);
@@ -221,6 +260,7 @@ for i = 1:8
 	imagesc(w); 
 	colorbar; 
 	saveas(gcf, strcat('NMF_8_component_',string(i),'.jpeg'));
+	clear gcf;
 end
 cd ..;
 
@@ -228,9 +268,12 @@ cd ..;
 mkdir NMF_10_component;
 cd NMF_10_component;
 [W H] = opnmf_mem(X,10);
+norms(5) = norm(X - W*H,'fro');
 h = H.';
+sum_of_distances = [];
 for j = 2:2:10
-	idx = kmeans(h, j);
+	[idx, t, sumd] = kmeans(h, j);
+	sum_of_distances = [sum_of_distances sum(sumd)];
 
 	text = "Sample name, Source, Atrophy Level, Category Assigned" + newline;
 	for i = 1:1000
@@ -258,6 +301,12 @@ for j = 2:2:10
 	fprintf(fid, text);
 	fclose(fid);
 end
+figure('visible','off'); 
+plot([2 4 6 8 10], sum_of_distances, 'LineWidth', 2, 'Marker', 'o');
+title('Total Distance Error');
+xlabel('k');
+ylabel('Error');
+saveas(gcf, 'Kmeans_Distance_Error.jpeg');
 for i = 1:10
 	w = reshape(W(:,i), [100,100]);
 	w = rescale(w, 0, 255);
@@ -265,9 +314,17 @@ for i = 1:10
 	imagesc(w); 
 	colorbar; 
 	saveas(gcf, strcat('NMF_10_component_',string(i),'.jpeg'));
+	clear gcf;
 end
 cd ..;
 
+figure('visible','off'); 
+scatter([2 4 6 8 10], norms, 200, 'filled');
+title('OPNMF Reconstruction Error');
+xlabel('Number of Components');
+ylabel('Error');
+saveas(gcf, 'OPNMF_Reconstruction_Error.jpeg');
+clear gcf;
 
 
 

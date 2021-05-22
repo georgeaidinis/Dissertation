@@ -319,10 +319,13 @@ end
 cd ..;
 
 figure('visible','off'); 
-scatter([2 4 6 8 10], norms, 200, 'filled');
+scatter([2 4 6 8 10], norms, 100, 'filled');
 title('OPNMF Reconstruction Error');
 xlabel('Number of Components');
 ylabel('Error');
+grid on;
+grid minor;
+ylim([max(min(norms) - 1, 0), max(norms) + 1]);
 saveas(gcf, 'OPNMF_Reconstruction_Error.jpeg');
 clear gcf;
 

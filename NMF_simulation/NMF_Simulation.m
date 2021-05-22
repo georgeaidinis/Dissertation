@@ -46,10 +46,10 @@ cd NMF_2_component;
 [W H] = opnmf_mem(X,2);
 norms(1) = norm(X - W*H,'fro');
 h = H.';
-sum_of_distances = [];
+sum_of_distances_2 = [];
 for j = 2:2:10
 	[idx, t, sumd] = kmeans(h, j);
-	sum_of_distances = [sum_of_distances sum(sumd)];
+	sum_of_distances_2 = [sum_of_distances_2 sum(sumd)];
 	correct = 0;
 	text = "Sample name, Source, Atrophy Level, Category Assigned" + newline;
 
@@ -85,7 +85,7 @@ for j = 2:2:10
 	fclose(fid);
 end
 figure('visible','off'); 
-plot([2 4 6 8 10], sum_of_distances, 'LineWidth', 2, 'Marker', 'o');
+plot([2 4 6 8 10], sum_of_distances_2, 'LineWidth', 2, 'Marker', 'o');
 title('Total Distance Error');
 xlabel('k');
 ylabel('Error');
@@ -108,10 +108,10 @@ cd NMF_4_component;
 [W H] = opnmf_mem(X,4);
 norms(2) = norm(X - W*H,'fro');
 h = H.';
-sum_of_distances = [];
+sum_of_distances_4 = [];
 for j = 2:2:10
 	[idx, t, sumd] = kmeans(h, j);
-	sum_of_distances = [sum_of_distances sum(sumd)];
+	sum_of_distances_4 = [sum_of_distances_4 sum(sumd)];
 
 	text = "Sample name, Source, Atrophy Level, Category Assigned" + newline;
 	for i = 1:1000
@@ -140,7 +140,7 @@ for j = 2:2:10
 	fclose(fid);
 end
 figure('visible','off'); 
-plot([2 4 6 8 10], sum_of_distances, 'LineWidth', 2, 'Marker', 'o');
+plot([2 4 6 8 10], sum_of_distances_4, 'LineWidth', 2, 'Marker', 'o');
 title('Total Distance Error');
 xlabel('k');
 ylabel('Error');
@@ -162,10 +162,10 @@ cd NMF_6_component;
 [W H] = opnmf_mem(X,6);
 norms(3) = norm(X - W*H,'fro');
 h = H.';
-sum_of_distances = [];
+sum_of_distances_6 = [];
 for j = 2:2:10
 	[idx, t, sumd] = kmeans(h, j);
-	sum_of_distances = [sum_of_distances sum(sumd)];
+	sum_of_distances_6 = [sum_of_distances_6 sum(sumd)];
 
 	text = "Sample name, Source, Atrophy Level, Category Assigned" + newline;
 	for i = 1:1000
@@ -194,7 +194,7 @@ for j = 2:2:10
 	fclose(fid);
 end
 figure('visible','off'); 
-plot([2 4 6 8 10], sum_of_distances, 'LineWidth', 2, 'Marker', 'o');
+plot([2 4 6 8 10], sum_of_distances_6, 'LineWidth', 2, 'Marker', 'o');
 title('Total Distance Error');
 xlabel('k');
 ylabel('Error');
@@ -216,10 +216,10 @@ cd NMF_8_component;
 [W H] = opnmf_mem(X,8);
 norms(4) = norm(X - W*H,'fro');
 h = H.';
-sum_of_distances = [];
+sum_of_distances_8 = [];
 for j = 2:2:10
 	[idx, t, sumd] = kmeans(h, j);
-	sum_of_distances = [sum_of_distances sum(sumd)];
+	sum_of_distances_8 = [sum_of_distances_8 sum(sumd)];
 
 	text = "Sample name, Source, Atrophy Level, Category Assigned" + newline;
 	for i = 1:1000
@@ -248,7 +248,7 @@ for j = 2:2:10
 	fclose(fid);
 end
 figure('visible','off'); 
-plot([2 4 6 8 10], sum_of_distances, 'LineWidth', 2, 'Marker', 'o');
+plot([2 4 6 8 10], sum_of_distances_8, 'LineWidth', 2, 'Marker', 'o');
 title('Total Distance Error');
 xlabel('k');
 ylabel('Error');
@@ -270,10 +270,10 @@ cd NMF_10_component;
 [W H] = opnmf_mem(X,10);
 norms(5) = norm(X - W*H,'fro');
 h = H.';
-sum_of_distances = [];
+sum_of_distances_10 = [];
 for j = 2:2:10
 	[idx, t, sumd] = kmeans(h, j);
-	sum_of_distances = [sum_of_distances sum(sumd)];
+	sum_of_distances_10 = [sum_of_distances_10 sum(sumd)];
 
 	text = "Sample name, Source, Atrophy Level, Category Assigned" + newline;
 	for i = 1:1000
@@ -302,7 +302,7 @@ for j = 2:2:10
 	fclose(fid);
 end
 figure('visible','off'); 
-plot([2 4 6 8 10], sum_of_distances, 'LineWidth', 2, 'Marker', 'o');
+plot([2 4 6 8 10], sum_of_distances_10, 'LineWidth', 2, 'Marker', 'o');
 title('Total Distance Error');
 xlabel('k');
 ylabel('Error');
@@ -326,6 +326,24 @@ ylabel('Error');
 saveas(gcf, 'OPNMF_Reconstruction_Error.jpeg');
 clear gcf;
 
+figure('visible','off');
+k = 2:2:10;
+plot(k, sum_of_distances_2,'-o');
+hold on;
+plot(k, sum_of_distances_4,'-o');
+hold on;
+plot(k, sum_of_distances_6,'-o');
+hold on;
+plot(k, sum_of_distances_8,'-o');
+hold on;
+plot(k, sum_of_distances_10,'-o');
+title('K-means Distance error based on OPNMF # of Components');
+xlabel('k');
+ylabel('Distance Error');
+legend('2 components','4 components','6 components','8 components','10 components');
+hold off;
+saveas(gcf, 'OPNMF_Distance_Error.jpeg');
+clear gcf;
 
 
 

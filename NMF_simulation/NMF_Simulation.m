@@ -89,7 +89,7 @@ plot([2 4 6 8 10], sum_of_distances_2, 'LineWidth', 2, 'Marker', 'o');
 title('Total Distance Error');
 xlabel('k');
 ylabel('Error');
-saveas(gcf, 'Kmeans_Distance_Error.jpeg');
+saveas(gcf, 'Kmeans_Distance_Error_2.jpeg');
 clear gcf;
 for i = 1:2
 	w = reshape(W(:,i), [100,100]);
@@ -144,7 +144,7 @@ plot([2 4 6 8 10], sum_of_distances_4, 'LineWidth', 2, 'Marker', 'o');
 title('Total Distance Error');
 xlabel('k');
 ylabel('Error');
-saveas(gcf, 'Kmeans_Distance_Error.jpeg');
+saveas(gcf, 'Kmeans_Distance_Error_4.jpeg');
 for i = 1:4
 	w = reshape(W(:,i), [100,100]);
 	w = rescale(w, 0, 255);
@@ -198,7 +198,7 @@ plot([2 4 6 8 10], sum_of_distances_6, 'LineWidth', 2, 'Marker', 'o');
 title('Total Distance Error');
 xlabel('k');
 ylabel('Error');
-saveas(gcf, 'Kmeans_Distance_Error.jpeg');
+saveas(gcf, 'Kmeans_Distance_Error_6.jpeg');
 for i = 1:6
 	w = reshape(W(:,i), [100,100]);
 	w = rescale(w, 0, 255);
@@ -252,7 +252,7 @@ plot([2 4 6 8 10], sum_of_distances_8, 'LineWidth', 2, 'Marker', 'o');
 title('Total Distance Error');
 xlabel('k');
 ylabel('Error');
-saveas(gcf, 'Kmeans_Distance_Error.jpeg');
+saveas(gcf, 'Kmeans_Distance_Error_8.jpeg');
 for i = 1:8
 	w = reshape(W(:,i), [100,100]);
 	w = rescale(w, 0, 255);
@@ -306,7 +306,7 @@ plot([2 4 6 8 10], sum_of_distances_10, 'LineWidth', 2, 'Marker', 'o');
 title('Total Distance Error');
 xlabel('k');
 ylabel('Error');
-saveas(gcf, 'Kmeans_Distance_Error.jpeg');
+saveas(gcf, 'Kmeans_Distance_Error_10.jpeg');
 for i = 1:10
 	w = reshape(W(:,i), [100,100]);
 	w = rescale(w, 0, 255);

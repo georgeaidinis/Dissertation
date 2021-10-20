@@ -11,3 +11,4 @@ https://onedrive.live.com/?id=AA8858068CE037C7!839
 8) MV Learning in Biomedical Applications
 9) Patterns of cortical Remodelling
 10) Voxel-Based Morphometry Using the RAVENS Maps: Methods and Validation Using Simulated Longitudinal Atrophy
+11) Generative Adversarial Networks in Computer Vision A Survey and Taxonomy

@@ -140,6 +140,6 @@ dmypy.json
 *.mat
 *.jpeg
 *.zip
-#*.csv
-NMF_simulation/Code/Data\ +\ NMF\ +\ Clustering R1R2R3/
+*.csv
+DeepCCA\ Model/DATA
 *.xlsx

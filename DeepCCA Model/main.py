@@ -19,7 +19,7 @@ torch.set_default_tensor_type(torch.DoubleTensor)
 
 
 class Solver():
-    def __init__(self, model, linear_cca, outdim_size, epoch_num, batch_size, learning_rate, reg_par, device=torch.device('cpu')):
+    def __init__(self, model, linear_cca, outdim_size, epoch_num, batch_size, learning_rate, reg_par, device=torch.device('cpu'), epoch_log_freq=10):
         self.model = nn.DataParallel(model)
         self.model.to(device)
         self.epoch_num = epoch_num
@@ -28,6 +28,7 @@ class Solver():
         self.optimizer = torch.optim.RMSprop(
             self.model.parameters(), lr=learning_rate, weight_decay=reg_par)
         self.device = device
+        self.epoch_log_freq = epoch_log_freq
 
         self.linear_cca = linear_cca
 
@@ -94,13 +95,15 @@ class Solver():
                         best_val_loss = val_loss
                         torch.save(self.model.state_dict(), checkpoint)
                     else:
-                        self.logger.info("Epoch {:d}: val_loss did not improve from {:.4f}".format(
-                            epoch + 1, best_val_loss))
+                        if epoch%self.epoch_log_freq == 0:
+                            self.logger.info("Epoch {:d}: val_loss did not improve from {:.4f}".format(
+                                epoch + 1, best_val_loss))
             else:
                 torch.save(self.model.state_dict(), checkpoint)
             epoch_time = time.time() - epoch_start_time
-            self.logger.info(info_string.format(
-                epoch + 1, self.epoch_num, epoch_time, train_loss))
+            if epoch%self.epoch_log_freq == 0:
+                self.logger.info(info_string.format(
+                    epoch + 1, self.epoch_num, epoch_time, train_loss))
         # train_linear_cca
         if self.linear_cca is not None:
             _, outputs = self._get_outputs(x1, x2)
@@ -123,6 +126,8 @@ class Solver():
             if use_linear_cca:
                 print("Linear CCA started!")
                 outputs = self.linear_cca.test(outputs[0], outputs[1])
+                print("Mean of Losses:")
+                print(np.mean(losses))
                 return np.mean(losses), outputs
             else:
                 return np.mean(losses)

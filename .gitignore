@@ -135,13 +135,13 @@ dmypy.json
 .DS_Store
 
 # Data:
-*.model
+.model
 *.pkl
 *.jpg
 *.mat
 *.jpeg
 *.zip
 *.csv
-DeepCCA\ Model/DATA
+
 *.xlsx
 *.numbers

@@ -97,16 +97,20 @@ class Solver():
                     val_loss = self.test(vx1, vx2)
                     info_string += " - val_loss: {:.4f}".format(val_loss)
                     if val_loss < best_val_loss:
-                        self.logger.info(
-                            "Epoch {:d}: val_loss improved from {:.4f} to {:.4f}, saving model to {}".format(epoch + 1, best_val_loss, val_loss, checkpoint))
+                        if checkpoint:
+                            self.logger.info("Epoch {:d}: val_loss improved from {:.4f} to {:.4f}, saving model to {}".format(epoch + 1, best_val_loss, val_loss, checkpoint))
+                        else:
+                            self.logger.info("Epoch {:d}: val_loss improved from {:.4f} to {:.4f}".format(epoch + 1, best_val_loss, val_loss))
                         best_val_loss = val_loss
-                        torch.save(self.model.state_dict(), checkpoint)
+                        if checkpoint:
+                            torch.save(self.model.state_dict(), checkpoint)
                     else:
                         if epoch%self.epoch_log_freq == 0:
                             self.logger.info("Epoch {:d}: val_loss did not improve from {:.4f}".format(
                                 epoch + 1, best_val_loss))
             else:
-                torch.save(self.model.state_dict(), checkpoint)
+                if checkpoint:
+                    torch.save(self.model.state_dict(), checkpoint)
             epoch_time = time.time() - epoch_start_time
             if epoch%self.epoch_log_freq == 0:
                 self.logger.info(info_string.format(
@@ -115,9 +119,9 @@ class Solver():
         if self.linear_cca is not None:
             _, outputs = self._get_outputs(x1, x2)
             self.train_linear_cca(outputs[0], outputs[1])
-
-        checkpoint_ = torch.load(checkpoint)
-        self.model.load_state_dict(checkpoint_)
+        if checkpoint:
+            checkpoint_ = torch.load(checkpoint)
+            self.model.load_state_dict(checkpoint_)
         if vx1 is not None and vx2 is not None:
             loss = self.test(vx1, vx2)
             self.logger.info("loss on validation data: {:.4f}".format(loss))

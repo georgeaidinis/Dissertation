@@ -136,7 +136,7 @@ dmypy.json
 
 # Data:
 *.model
-*.pkl
+# *.pkl
 *.jpg
 *.mat
 *.jpeg

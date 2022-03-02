@@ -19,7 +19,7 @@ torch.set_default_tensor_type(torch.DoubleTensor)
 
 
 class Solver():
-    def __init__(self, model, linear_cca, outdim_size, epoch_num, batch_size, learning_rate, reg_par, device=torch.device('cpu'), epoch_log_freq=10):
+    def __init__(self, model, linear_cca, outdim_size, epoch_num, batch_size, learning_rate, reg_par, device=torch.device('cpu'), epoch_log_freq=10, log=True):
         self.model = nn.DataParallel(model)
         self.model.to(device)
         self.epoch_num = epoch_num
@@ -45,13 +45,18 @@ class Solver():
 
         self.logger.info(self.model)
         self.logger.info(self.optimizer)
+        self.log = log
+        
+        self.train_losses = []
+        self.val_losses = []
+        
+    def get_losses(self):
+        return self.train_losses, self.val_losses
 
     def fit(self, x1, x2, vx1=None, vx2=None, tx1=None, tx2=None, checkpoint='checkpoint.model'):
         """
-
         x1, x2 are the vectors needs to be make correlated
         dim=[batch_size, feats]
-
         """
         x1.to(self.device)
         x2.to(self.device)
@@ -89,18 +94,22 @@ class Solver():
                 # self.optimizer.step(closure)
                 self.optimizer.step()
             train_loss = np.mean(train_losses)
-
+            self.train_losses.append(train_loss)
+            
             info_string = "Epoch {:d}/{:d} - time: {:.2f} - training_loss: {:.4f}"
             if vx1 is not None and vx2 is not None:
                 with torch.no_grad():
                     self.model.eval()
                     val_loss = self.test(vx1, vx2)
+                    self.val_losses.append(val_loss)
                     info_string += " - val_loss: {:.4f}".format(val_loss)
                     if val_loss < best_val_loss:
                         if checkpoint:
-                            self.logger.info("Epoch {:d}: val_loss improved from {:.4f} to {:.4f}, saving model to {}".format(epoch + 1, best_val_loss, val_loss, checkpoint))
+                            if self.log:
+                                self.logger.info("Epoch {:d}: val_loss improved from {:.4f} to {:.4f}, saving model to {}".format(epoch + 1, best_val_loss, val_loss, checkpoint))
                         else:
-                            self.logger.info("Epoch {:d}: val_loss improved from {:.4f} to {:.4f}".format(epoch + 1, best_val_loss, val_loss))
+                            if self.log:
+                                self.logger.info("Epoch {:d}: val_loss improved from {:.4f} to {:.4f}".format(epoch + 1, best_val_loss, val_loss))
                         best_val_loss = val_loss
                         if checkpoint:
                             torch.save(self.model.state_dict(), checkpoint)

@@ -6,7 +6,7 @@ from torch.utils.data import BatchSampler, SequentialSampler, RandomSampler
 from DeepCCAModels import DeepCCA
 from utils import load_data, svm_classify
 import time
-# import logging
+import logging
 try:
     import cPickle as thepickle
 except ImportError:
@@ -34,17 +34,17 @@ class Solver():
 
         self.outdim_size = outdim_size
 
-#         formatter = logging.Formatter(
-#             "[ %(levelname)s : %(asctime)s ] - %(message)s")
-#         logging.basicConfig(
-#             level=logging.DEBUG, format="[ %(levelname)s : %(asctime)s ] - %(message)s")
-#         self.logger = logging.getLogger("Pytorch")
-#         fh = logging.FileHandler("DCCA.log")
-#         fh.setFormatter(formatter)
-#         self.logger.addHandler(fh)
+        formatter = logging.Formatter(
+            "[ %(levelname)s : %(asctime)s ] - %(message)s")
+        logging.basicConfig(
+            level=logging.DEBUG, format="[ %(levelname)s : %(asctime)s ] - %(message)s")
+        self.logger = logging.getLogger("Pytorch")
+        fh = logging.FileHandler("DCCA.log")
+        fh.setFormatter(formatter)
+        self.logger.addHandler(fh)
 
-#         self.logger.info(self.model)
-#         self.logger.info(self.optimizer)
+        self.logger.info(self.model)
+        self.logger.info(self.optimizer)
         self.log = log
         
         self.train_losses = []
@@ -53,7 +53,7 @@ class Solver():
     def get_losses(self):
         return self.train_losses, self.val_losses
 
-    def fit(self, x1, x2, vx1=None, vx2=None, tx1=None, tx2=None, checkpoint='checkpoint.model', no_print=False):
+    def fit(self, x1, x2, vx1=None, vx2=None, tx1=None, tx2=None, checkpoint='checkpoint.model'):
         """
         x1, x2 are the vectors needs to be make correlated
         dim=[batch_size, feats]
@@ -105,28 +105,26 @@ class Solver():
                     info_string += " - val_loss: {:.4f}".format(val_loss)
                     if val_loss < best_val_loss:
                         if checkpoint:
-                            pass
-                            # if self.log:
-                            #     self.logger.info("Epoch {:d}: val_loss improved from {:.4f} to {:.4f}, saving model to {}".format(epoch + 1, best_val_loss, val_loss, checkpoint))
+                            if self.log:
+                                self.logger.info("Epoch {:d}: val_loss improved from {:.4f} to {:.4f}, saving model to {}".format(epoch + 1, best_val_loss, val_loss, checkpoint))
                         else:
-                            pass
-                            # if self.log:
-                            #     self.logger.info("Epoch {:d}: val_loss improved from {:.4f} to {:.4f}".format(epoch + 1, best_val_loss, val_loss))
+                            if self.log:
+                                self.logger.info("Epoch {:d}: val_loss improved from {:.4f} to {:.4f}".format(epoch + 1, best_val_loss, val_loss))
                         best_val_loss = val_loss
                         if checkpoint:
                             torch.save(self.model.state_dict(), checkpoint)
                     else:
                         if epoch%self.epoch_log_freq == 0:
-                            # if self.log:
-                            #     self.logger.info("Epoch {:d}: val_loss did not improve from {:.4f}".format(epoch + 1, best_val_loss))
-                            pass
+                            if self.log:
+                                self.logger.info("Epoch {:d}: val_loss did not improve from {:.4f}".format(
+                                epoch + 1, best_val_loss))
             else:
                 if checkpoint:
                     torch.save(self.model.state_dict(), checkpoint)
             epoch_time = time.time() - epoch_start_time
-            # if epoch%self.epoch_log_freq == 0:
-            #     self.logger.info(info_string.format(
-            #         epoch + 1, self.epoch_num, epoch_time, train_loss))
+            if epoch%self.epoch_log_freq == 0:
+                self.logger.info(info_string.format(
+                    epoch + 1, self.epoch_num, epoch_time, train_loss))
         # train_linear_cca
         if self.linear_cca is not None:
             _, outputs = self._get_outputs(x1, x2)
@@ -136,22 +134,21 @@ class Solver():
             self.model.load_state_dict(checkpoint_)
         if vx1 is not None and vx2 is not None:
             loss = self.test(vx1, vx2)
-            # self.logger.info("loss on validation data: {:.4f}".format(loss))
-            print("loss on validation data: {:.4f}".format(loss))
+            self.logger.info("loss on validation data: {:.4f}".format(loss))
+
         if tx1 is not None and tx2 is not None:
             loss = self.test(tx1, tx2)
-            # self.logger.info('loss on test data: {:.4f}'.format(loss))
-            print('loss on test data: {:.4f}'.format(loss))
-            return loss
+            self.logger.info('loss on test data: {:.4f}'.format(loss))
+
     def test(self, x1, x2, use_linear_cca=False):
         with torch.no_grad():
             losses, outputs = self._get_outputs(x1, x2)
 
             if use_linear_cca:
-                # print("Linear CCA started!")
+                print("Linear CCA started!")
                 outputs = self.linear_cca.test(outputs[0], outputs[1])
-                # print("Mean of Losses:")
-                # print(np.mean(losses))
+                print("Mean of Losses:")
+                print(np.mean(losses))
                 return np.mean(losses), outputs
             else:
                 return np.mean(losses)

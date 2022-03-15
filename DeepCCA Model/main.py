@@ -33,19 +33,22 @@ class Solver():
         self.linear_cca = linear_cca
 
         self.outdim_size = outdim_size
-
-        formatter = logging.Formatter(
-            "[ %(levelname)s : %(asctime)s ] - %(message)s")
-        logging.basicConfig(
-            level=logging.DEBUG, format="[ %(levelname)s : %(asctime)s ] - %(message)s")
-        self.logger = logging.getLogger("Pytorch")
-        fh = logging.FileHandler("DCCA.log")
-        fh.setFormatter(formatter)
-        self.logger.addHandler(fh)
-
-        self.logger.info(self.model)
-        self.logger.info(self.optimizer)
         self.log = log
+        self.logger = logging.getLogger("Pytorch")
+
+
+        if log:
+            formatter = logging.Formatter(
+                "[ %(levelname)s : %(asctime)s ] - %(message)s")
+            logging.basicConfig(
+                level=logging.DEBUG, format="[ %(levelname)s : %(asctime)s ] - %(message)s")
+            fh = logging.FileHandler("DCCA.log")
+            fh.setFormatter(formatter)
+            self.logger.addHandler(fh)
+
+            self.logger.info(self.model)
+            self.logger.info(self.optimizer)
+        
         
         self.train_losses = []
         self.val_losses = []
@@ -139,6 +142,7 @@ class Solver():
         if tx1 is not None and tx2 is not None:
             loss = self.test(tx1, tx2)
             self.logger.info('loss on test data: {:.4f}'.format(loss))
+            return loss
 
     def test(self, x1, x2, use_linear_cca=False):
         with torch.no_grad():

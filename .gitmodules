@@ -1,0 +1,4 @@
+[submodule "DeepCCA Model/prince"]
+	path = DeepCCA Model/prince
+	url = https://github.com/MaxHalford/prince
+	ignore = dirty

@@ -25,8 +25,8 @@ class Solver():
         self.epoch_num = epoch_num
         self.batch_size = batch_size
         self.loss = model.loss
-        self.optimizer = torch.optim.RMSprop(self.model.parameters(), lr=learning_rate, weight_decay=reg_par)
-        # self.optimizer = torch.optim.LBFGS(self.model.parameters())
+        # self.optimizer = torch.optim.RMSprop(self.model.parameters(), lr=learning_rate, weight_decay=reg_par)
+        self.optimizer = torch.optim.LBFGS(self.model.parameters())
         self.device = device
         self.epoch_log_freq = epoch_log_freq
 
@@ -88,14 +88,14 @@ class Solver():
                 loss = self.loss(o1, o2)
                 train_losses.append(loss.item())
                 loss.backward()
-                # def closure():
-                #     self.optimizer.zero_grad()
-                #     o1, o2 = self.model(batch_x1, batch_x2)
-                #     loss = self.loss(o1, o2)
-                #     loss.backward()
-                #     return loss
-                # self.optimizer.step(closure)
-                self.optimizer.step()
+                def closure():
+                    self.optimizer.zero_grad()
+                    o1, o2 = self.model(batch_x1, batch_x2)
+                    loss = self.loss(o1, o2)
+                    loss.backward()
+                    return loss
+                self.optimizer.step(closure)
+                # self.optimizer.step()
             train_loss = np.mean(train_losses)
             self.train_losses.append(train_loss)
             

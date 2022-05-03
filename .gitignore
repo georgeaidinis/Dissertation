@@ -6,6 +6,8 @@ __pycache__/
 # PDFs so that large papers aren't uploaded here
 *.pdf
 
+# Except the folder for the document resources:
+!Document/Resources/*
 # C extensions
 *.so
 

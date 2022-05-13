@@ -3,11 +3,10 @@ __pycache__/
 *.py[cod]
 *$py.class
 
-# PDFs so that large papers aren't uploaded here
-*.pdf
-
-# Except the folder for the document resources:
-!Document/Resources/*
+# Initial Research papers:
+Papers/*
+# Useful Information stuff:
+**/Useful Information/*
 
 # C extensions
 *.so

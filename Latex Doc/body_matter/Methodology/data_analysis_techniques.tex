@@ -1,0 +1,19 @@
+\section{\tl{Data Analysis Techniques}}
+\en{In our experimentation with the dataset, it was noticed early that the nature of the different types of views of the dataset was an obstacle to the methods and the goals we wanted to achieve. We hypothesized that the difficulty to achieve better classification scores stemmed from the fact that the two views of data were different not only in type (numerical vs categorical), but in the difference of the dimensions as well, making the algorithms employed inefficient and/or not well suited for the task.
+
+To remedy this situation, we experimented with data analysis techniques. Initially we tried OPNMF, to reduce the number of imaging dimensions, to more closely match the number of genetic dimensions. Then, we tried using MCA to transform the genetic data from categorical to numerical, and finally we tried creating a combining transformation of the two views using FAMD, as a benchmark for the other methods. All possible combinations of the methods were tested, in order to find the best possible mix.
+
+A data analysis technique that this study explores is that of Orthonormal Projective Non-Negative Matrix Factorization. This method is used to dimensionally reduce a dataset, while still maintaining interpretability, due to the non-negative nature of the matrix decomposition. For this dataset, we applied OPNMF to the RAVENS maps of the imaging data, because it has been observed to achieve better results than the MUSE ROIs, while reducing the dataset dimensions. In this work, the imaging data was reduced into 30 components. \cite{79}
+
+The number of the resulting components was chosen in a way that was close to the number of the number of dimensions of the genetic data, close to the (later referenced) number of MCA components, while not too small in order to retain most of the information and minimize approximation error, and not too big in order for the method to have any use. It is worth noting that the OPNMF method rescales the data, a much needed action, since different ROIs have orders of magnitude different intensities, a feature that the SVM classifiers benefit from.
+
+Another data analysis technique that is used in this study is Multiple Correspondence Analysis, which, as previously mentioned, analyses the structure of a number of dependent categorical variables, and performs dimensionality reduction if necessary. For this dataset, we applied MCA to the genetic data, in order to dimensionally reduce the 54 SNPs into 10 components. This had the added benefit of transforming the categorical data into numerical, which we hypothesized would greatly enhance the outcome of the classification.
+
+The method was performed using mca, a package for python which is intended to be used along with pandas. \cite{80}
+
+The third and final technique we explored is Factor Analysis of Mixed Data, which combines multiple views of the dataset, to create a transformation along with a dimensionality reduction. 
+
+The number of the resulting components was chosen based on the fitting time, however it was quickly observed that above 12 components, the time needed for computing the resulting components was more than substantial, making the process of optimizing quite lengthy and not feasible. 
+
+The method was based on the implementation of the python package prince, an open-source package developed by Max Halford. \cite{81} 
+}

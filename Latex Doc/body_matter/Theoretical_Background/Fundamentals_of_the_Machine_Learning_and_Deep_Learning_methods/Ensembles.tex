@@ -1,0 +1,25 @@
+\subsection{\en{Ensemble Learning}}
+\en{Ensemble learning is a technique of combining a multitude of models to enhance the performance of the task, such as classification problems, regression or approximation tasks etc. This is achieved by applying the (perhaps different) models to the data available (or a subset thereof) and combine their outputs, in order to make a better attempt at solving the problem. \cite{64}
+
+An ensemble is created by combining either different models, or models with different parameter initializations and configurations. Such models can be relatively simple, such as decision trees, naive bayes classifiers, or SVMs, or more complicated, such as multi layer perceptrons, or even other ensembles altogether. A key aspect of the base model selection is to create enough diversity of opinions, that is differentiation between the models themselves. \cite{65}
+
+The ensemble learning technique relies on two concepts: the way the dataset is used to train the base models (how the data is introduced to the models) and the way that the outcome of each base model is considered towards the combined outcome. 
+
+The method that is employed for training the base models can be as simple as dividing the dataset by the number of models and feeding each subset to each model, or as strategically complex as to involve feature selection along with data augmentation during the phase of training the base models. Another approach might be introducing different views of the dataset to different base models. \cite{65}
+
+Respectively, the method employed for combining the outcomes of the base models can be as simple as simple majority voting (for example the most voted class in a classification problem) or algebraic combiners, or more sophisticated and tailored to a specific problem strategies. 
+
+The idea behind ensemble learning is to enhance the decision taken with group knowledge; that is to reduce the likelihood of an unfortunate selection. While that is not guaranteed, there is empirical evidence that ensemble models achieve in general better performance than that of single models, and in some case better than that of the average of their base models. \cite{65} 
+
+
+
+Another motive for employing ensemble methods is their ability to perform fairly well both in big data tasks and when there isn't adequate data for the successful training of a single model. The big data case is handled with dividing the dataset into many subsets, and training each model on a single subset, thus making the training phase much easier. On the other hand, with a strategy such as bootstrapping, different base models can be trained on different combination of samples of data, taken from the initial dataset, with replacement, and treated as if they were independently drawn. (\cite{65}, \cite{66})
+\bigbreak
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\textwidth]{figures/Theoretical_Background/EnsembleLearning.jpg}
+    \caption{\en{Combining classifiers with different decision boundaries reduce error. \cite{68}}}
+\end{figure}
+\bigbreak
+One method of ensemble learning applied to the problem of classification is that of Bagging, or Bootstrap Aggregating, where the base models are trained on drawn samples from the initial dataset, with replacement, and the base models are classifiers of the same type. The individual classifiers' outcomes are combined in a simple majority voting strategy to determine the overall outcome of the ensemble. Another notable example is that of Adaboost, a version of the boosting ensemble, adapted for the problem of multiclass classification. As previously, bootstrapped training data samples are drawn from an initially uniform but  continuously evolving distribution, ensuring that samples that were previously mislabeled are seen more often, and therefore training the base classifiers to the most difficult instances. The base classifiers are combined in a weighted majority voting manner.  (\cite{65}, \cite{67})
+}

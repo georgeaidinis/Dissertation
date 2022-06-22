@@ -1,0 +1,30 @@
+\subsection{\en{Multiple Correspondence Analysis}}
+\en{Multiple Correspondence Analysis (MCA) is a data analysis technique used to analyse the structure of a number of dependent categorical variables in a dataset. It is an extension of simple Correspondence Analysis, and is similar to the well known method of Principal Component Analysis. \cite{45}
+
+
+MCA is used when a dataset contains variables that are described by nominal values, such as "Male" and "Female", or "Red", "Green", "Blue", etc. The variables can also contain quantitative values, split into categories. MCA is performed on an indicator matrix - also called a Complete Disjunctive Table - or on a Burt table. It can also be viewed as the PCA method applied to the CDT. \cite{46}
+
+
+Suppose there is a dataset containing only categorical variables, and its corresponding CDT, $X$. Let $K$ be the number of the nominal variables, and each nominal variable has $J_K$ levels and the sum of the $J_K$ is equal to $J$. There are $I$ observations. Then the table $X$ is actually the $I \times J$ indicator matrix. 
+
+We indicate the sum of all entries to be $N$, and compute the probability matrix $Z = {
+frac{X}{N}}$.
+We also use the special vectors $r$, and $c$, which are the vector of the row totals of $Z$, and the vector of column totals of $Z$ respectively.
+
+Then, if 
+\bigbreak
+$D_c = diag(c), D_r = diag(r)$, 
+\bigbreak
+we have the factor scores of the MCA are obtained from the following singular value decomposition: 
+
+\bigbreak
+$M = D_r ^{ -{\frac{1}{2}}} (Z - rc^\intercal) D_c ^{ - {\frac{1}{2}}} = P \Delta Q ^\intercal$,
+\bigbreak  
+
+where $\Delta$ is the diagonal matrix of the singular values, and the matrix of the eigenvalues is $\Lambda = \Delta^2$. 
+MCA decomposes the matrix  into coordinates (or scores) of the factor space, which can be found as follows:
+\bigbreak  
+$F = D_r^{- {\frac{1}{2}}} P \Delta$, for the row coordinates and 
+\bigbreak  
+$G = D_c^{- {\frac{1}{2}}} Q \Delta$ for the column ones.
+}

@@ -1,0 +1,26 @@
+\subsection{\en{Factor Analysis of Mixed Data}}
+\en{Similar to MCA, Factor Analysis of Mixed Data (FAMD) is a data analysis technique used to analyse the structure of mixed data, meaning both continuous numerical as well as categorical data. It is also used to in order to reduce the number of dimensions of the dataset, and improve interpretability. It is based on the methods of MCA and PCA. \cite{55}
+
+Suppose there is a dataset containing both quantitative (numerical) and qualitative (categorical) variables. Let $K_1$ be the quantitative variables, $Q$ the qualitative variables, and $K_q$ the categories of the $q^{th}$ variable. We can denote the overall number of categories of the qualitative variables as: 
+
+\bigbreak
+$K_2 = \sum_{q}^{} K_q$
+\bigbreak
+
+Let $K = K_1 + K_2 $ be the total number of quantitative variables and indicator variables.
+
+We assume that individuals have the same weight, and the diagonal metric of the weights of the individuals is: 
+
+\bigbreak
+$D = {\frac{1}{I}}I_d$
+\bigbreak
+
+The quantitative variables are represented by a vector of length 1, and the qualitative ones by a cloud of datapoints $N_q$ of its centered indicators. FAMD aims to look for a direction  of $v$ that maximizes the inertia (measure of weighted spread of the points) of the $\mathbb{R}^{I}$ cloud. That goal is perfectly achieved by maximizing the following criterion:
+
+\bigbreak
+$\sum_{k\epsilon K_1}^{} r^2(k,v) + \sum_{q\epsilon Q}^{} \eta^2(q,v)$  , where
+\bigbreak
+$\eta^2(q,v)$ is the squared correlation ratio between $q$ and $v$, and $ r^2(k,v)$  is the squared projection coordinate of variable $k$ on $v$. \cite{56}
+
+FAMD's number of resulting components can range from $1$ to $min(K_1, Q)$, where $K_1$ is the number of the quantitative variables and $Q$ is the number of the categorical ones.
+}

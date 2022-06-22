@@ -1,0 +1,38 @@
+\section{\tl{Classification}}
+\en{The task we tried to enhance the models for was the one of classification. To solve that, we chose the SVM family of models, and optimized it through parameter grid search, which is exhaustive search of all the different parameter combinations.
+
+As mentioned previously, SVMs can have different kernels, in order to accommodate for non-linear datasets. We experimented with linear, polynomial, and radial basis function kernels, which are among the most commonly used. For each kernel, its specific parameters were optimized through grid search, and the results were evaluated on their ability to generalize through cross validation. 
+
+For all of the different cases, we used the python library Scikit-Learn, and specifically the sklearn.svm module. \cite{82}
+
+In particular, for the linear kernel we experimented with L2 normalization penalty, [0.00001, 0.0001, 0.001, 0.01, 0.1, 1, 10] C (regularization parameter) values, and one-vs-rest multi class classification strategy. As for the polynomial kernel, we experimented with polynomial degrees of [2,3,4,5], independent term values of [0.00001, 0.0001, 0.001, 0.01, 0.1, 1, 10], C values of [0.00001, 0.0001, 0.001, 0.01, 0.1, 1, 10], and finally kernel coefficient values (g values) of [0.0001, 0.001, 0.01, 0.1, 1]. Finally, as for the radial basis function kernels, we experimented with C values of [0.00001, 0.0001, 0.001, 0.01, 0.1, 1, 10], and kernel coefficient values of [0.0001, 0.001, 0.01, 0.1, 1]. 
+
+Each kernel was given 1000 iterations in order to converge, and the cross validation was done with 5 folds. The data was split into train and test splits, with respective sizes of 80\% and 20\% of the initial dataset, without shuffling, as the data was already ordered randomly. All of the combinations were run on all of the potential different combinations on views of every data analysis techniques (imaging + genetic views, only imaging, only genetic). 
+
+Furthermore, in addition to the simple method of the SVM models, we attempted to use the method of ensemble learning to further enhance the classification outcome. For that reason, we experimented with the methods of Bagging (Bootstrap Aggregating) and Adaboost. For both of those methods, we experimented with the base classifier being a decision tree or a linear SVM. 
+
+For all of the different combinations, we used the python library Scikit-Learn, and specifically the sklearn.ensemble module.
+
+The parameter tuning for both of those models as well as their base classifiers was done with grid search along with cross validation, using 5 folds. Specifically, for the Bagging classifier ensemble model, the parameters that we experimented with were the number of estimators, with values of [5,10,15], the maximum samples of the dataset that an estimator could train on, with values of [60\%,80\%,100\%]. As for the Adaboost ensemble classifier model, the parameters we experimented with were again the number of estimators, with those being [5,10,15,50], and SAMME and SAMME.R for the boosting algorithm. The learning rate for this model was kept at 1.0.
+
+For the decision tree base classifier, the parameters we experimented with were the estimator criterion, with it being either gini Impurity or entropy, along with the max depth, with its values being [1,2,5]. Finally, for the linear SVM base classifier, we experimented with the C parameter, with its values being [0.00001, 0.0001, 0.001, 0.01, 0.1, 1, 10].
+
+Before the classification task, if needed, balancing and scaling was applied. Balancing the dataset was done through random undersampling, while scaling was performed utilizing scikit-learn's preprocessing module, and more specifically the StandardScaler function. This function standardizes features by removing the mean and scaling to unit variance.
+
+The metrics we chose for the classification task were those of accuracy, balanced accuracy, and F1 score. The implementation of the metrics that was used was again from Scikit-Learn. As for accuracy, it is the ratio of: 
+
+\bigbreak
+$Accuracy \; = \;{{\frac{True\;\; Positive\;\; +\;\;True\;\; Negative}{True\;\; Positive\;\; + \;\;False \;\;Positive\;\; + \;\;True\;\; Negative\;\; + \;\;False\;\; Negative}}}$
+\bigbreak
+
+As for the balanced accuracy, it is the ratio of:
+
+\bigbreak
+$Balanced \;\;Accuracy \; =Avg({\frac{True\;\;Positive} {True \;\;Positive \;\;+\;\; False \;\;Negative} }+ {\frac{True \;\;Negative}{True \;\; Negative \;\;+\;\;False \;\;Positive}})$
+\bigbreak
+
+And as for the F1 score, it is the ratio of:
+\bigbreak
+$F1 \;\; Score = {\frac{True\;\; Positive\;\;}{ True\;\; Positive\;\; + \;\;{\frac{1}{2}}( False \;\;Positive\;\; + \;\;False\;\; Negative)}}$
+\bigbreak
+}

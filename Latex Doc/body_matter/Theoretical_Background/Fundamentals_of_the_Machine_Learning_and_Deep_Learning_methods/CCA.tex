@@ -1,0 +1,27 @@
+\section{\tl{Fundamentals of the Machine Learning and Deep Learning methods}}
+\subsection{\en{Canonical Correlation Analysis}}
+\en{Canonical Correlation Analysis is a standard tool of multivariate statistical analysis used to discover and quantify associations between two sets of variables.  The aim of this method is to find a transformation (projection) of the two sets of variables, such that they are maximally associated (measured by correlation). The projections are found by performing a joint covariance analysis of the two variables. \cite{36}
+
+This concept was introduced by C. Jordan (1875), but the method was initially described by H. Hotelling (1936). It has been used extensively in many fields, such as economics, medicine, psychology, etc., and has many extensions, such as the Kernel CCA. (\cite{37}, \cite{38}, \cite{39})
+
+Let $X \in {\mathbb{R} ^ {q}}$, and $Y \in {\mathbb{R} ^ {p}}$, two random vectors, and their respective covariances  $Σ_{11}$ and $Σ_{22}$, as well as the cross covariance $Σ_{12}$. The aim of CCA is to find vectors , such that the correlation $ρ(a,b)= corr(a^\intercal X, b^\intercal Y)$ is maximised. 
+
+The correlation $ρ(a,b)$  can also be written as follows:
+\bigbreak
+$ρ = {\frac{a^\intercal Σ_{XY}b} {\sqrt{a^\intercal Σ_{XX}a} \sqrt{b^\intercal Σ_{YY} b}}}$
+\bigbreak
+This is achieved by setting the $a, b$ parameters as follows:
+\bigbreak
+$a = Σ_{XX}^{ - {\frac{1}{2}}}c$, and
+\bigbreak
+$b = Σ_{YY}^{ - {\frac{1}{2}}} d$, where
+\bigbreak
+$c$ is an eigenvector of $Σ_{XX}^{ - {\frac{1}{2}}}Σ_{XY}Σ_{YY}^{ - 1}Σ_{YX}Σ_{XX}^{ - {\frac{1}{2}}}$, 
+\bigbreak
+and $d$ is an eigenvector of $Σ_{YY}^{ - {\frac{1}{2}}}Σ_{YX}Σ_{XX}^{ - 1}Σ_{XY}Σ_{YY}^{ - {\frac{1}{2}}}$.
+\bigbreak
+The vectors $a,b$ are called canonical correlation vectors, and the indices  $u=a^\intercal X$ and $v=b^\intercal Y$ are called canonical correlation variables. 
+
+This process may be repeated $min(q,p)$ times, and find subsequent projections. However, the new vectors are subject to the constraint that they are to be uncorrelated with the previous ones, that is $a_i Σ_{XX} a_j = b_i Σ_{YY} b_j = 0 $, $\forall i<j$.  
+
+CCA is implemented using Singular Value Decomposition on the correlation matrix.}

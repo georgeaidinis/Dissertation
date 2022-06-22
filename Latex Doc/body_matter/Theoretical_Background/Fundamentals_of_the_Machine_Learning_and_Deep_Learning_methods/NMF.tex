@@ -1,0 +1,10 @@
+\subsection{\en{Non-Negative Matrix Factorization}}
+\en{Non-Negative Matrix Factorization (NMF) is a unsupervised, multivariate, analytic method for the approximate  factorization of a matrix $V$ into two matrices $W$,$H$ under the constraint that their elements are non-negative:
+$V=WH$, such that $H\geq 0$ and $W\geq 0$. \cite{47}
+
+The method was created by P. Paatero and U. Tapper, and further developed by D. Lee and H. Seung (\cite{48}, \cite{49}). It is used to reduce data dimensionality, perform clustering tasks and find underlying structures within the dataset. Because the resulting factorization contains non-negative elements, the method has the advantage of improved interpretability compared to other data dimensionality reduction methods, and has the ability to produce parts-based representation of the data, it has been applied in many different fields, such as machine learning, computer vision, signal processing, data mining, medical imaging etc. (\cite{50}, \cite{51}, \cite{52}, \cite{53})
+
+Lee and Seung’s multiplicative update rule is the basis of the method’s computation of the $W$ and $H$ matrices, and has the characteristics of being iterative and element based. However there are other ways, and it can be supplemented with additional constraints or regularizations, leading to many extensions. 
+
+One notable extension is that of Orthonormal Projective NMF (OPNMF), where the loading coefficients are estimated as the projection of the matrix  onto the estimated components $W$ ($H = W ^ \intercal V$), while maintaining orthonormality on the estimated components ($W^\intercal W = I$). As a result, all components participate in the reconstruction of all of the data samples, meaning that the overlap between the estimated components is significantly lower, having fewer parameters to be learned, while maintaining high sparsity. Additionally, this variant relies on the original update rule (and thus is computationally easier than the Projective NMF variant), and at the same time is able to generalize on unseen data without the need of retraining. \cite{50}
+}
